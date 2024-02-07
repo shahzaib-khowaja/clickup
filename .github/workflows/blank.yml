@@ -12,8 +12,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Test Case
         run: |
-          $result =2+2
-          Write-Host "Result of the calculation:$result"
+          $result = 2 + 2
+          Write-Host "Result of the calculation: $result"
       - name: Set up Git
         run: |
           git config --global user.email "shahzaib.kkhowaja@github.com"
