@@ -1,4 +1,4 @@
-name: Auto Merge to QA
+name: Auto Merge to QA-MANUAL
 
 on:
   workflow_dispatch:
