@@ -25,3 +25,7 @@ jobs:
           gh pr create --base branch1 --head branch2 --title "Auto Merge to QA" --body "Automatically created pull request from development to QA."
         env:
           GH_TOKEN: ${{ secrets.ABC }}
+      - name: Merge Pull Request to QA
+        run: |
+          # Merge the pull request to QA
+          gh pr merge --auto --squash --merge "Auto-merged changes"
