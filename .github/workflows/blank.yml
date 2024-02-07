@@ -1,31 +1,27 @@
-name: Auto Merge to QA-MANUAL
+name: Auto Approve Pull Request
 
 on:
   workflow_dispatch:
 
 jobs:
-  auto_merge_to_qa:
+  auto_approve_pull_request:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Git
-        run: |
-          git config --global user.email "shahzaib.kkhowaja@github.com"
-          git config --global user.name "shahzaib-khowaja"
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.ABC }}
+          branch: branch2  # Change to your target branch name
+          title: 'Auto-generated Pull Request'
+          body: 'This is an automatically generated pull request.'
+          commit-message: 'Auto-generated commit message'
 
-      - name: Create Pull Request to QA
-        run: |
-          # Create a pull request to QA
-          gh pr create --base branch1 --head branch2 --title "Auto Merge to QA" --body "Automatically created pull request from development to QA."
-        env:
-          GH_TOKEN: ${{ secrets.ABC }}
-          
-      - name: Merge Pull Request to QA
-        run: |
-          # Merge the pull request to QA
-          gh pr merge --squash -m "Auto-merged changes"
-        env:
-          GH_TOKEN: ${{ secrets.ABC }}
+      - name: Automatically approve the Pull Request
+        uses: tibdex/github-action-approve-pull-request@v1
+        with:
+          token: ${{ secrets.ABC }}
+          number: ${{ steps.create_pull_request.outputs.pull_request_number }}
