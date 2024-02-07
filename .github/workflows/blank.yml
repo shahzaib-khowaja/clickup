@@ -23,3 +23,5 @@ jobs:
  
           # Create a pull request to QA
           gh pr create --base branch1 --head branch2 --title "Auto Merge to QA" --body "Automatically created pull request from development to QA."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
