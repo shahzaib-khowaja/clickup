@@ -11,6 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Test Case
+        shell: pwsh
         run: |
           $result = 2 + 2
           Write-Host "Result of the calculation: $result"
