@@ -1,4 +1,4 @@
-name: Auto Merge to QA
+name: Auto Merge to QA-MANUAL
 
 on:
   workflow_dispatch:
@@ -10,14 +10,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      - name: Test Case
+        shell: pwsh
+        run: |
+          $result = 2 + 2
+          Write-Host "Result of the calculation: $result"
       - name: Set up Git
         run: |
           git config --global user.email "shahzaib.kkhowaja@github.com"
           git config --global user.name "shahzaib-khowaja"
-
       - name: Create Pull Request to QA
         run: |
- 
           # Create a pull request to QA
           gh pr create --base branch1 --head branch2 --title "Auto Merge to QA" --body "Automatically created pull request from development to QA."
+        env:
+          GH_TOKEN: ${{ secrets.ABC }}
+          
+      - name: Merge Pull Request to QA
+        run: |
+          # Merge the pull request to QA
+          gh pr merge -m branch2
+        env:
+          GH_TOKEN: ${{ secrets.ABC }}
