@@ -26,6 +26,6 @@ jobs:
       - name: Merge Pull Request to QA
         run: |
           # Merge the pull request to QA
-          gh pr merge --auto --squash -m "Auto-merged changes"
+          gh pr merge --squash -m "Auto-merged changes"
         env:
           GH_TOKEN: ${{ secrets.ABC }}
