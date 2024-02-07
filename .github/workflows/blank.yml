@@ -25,6 +25,6 @@ jobs:
       - name: Merge Pull Request to QA
         run: |
           # Merge the pull request to QA
-          gh pr merge -m Branch2
+          gh pr merge -m branch2
         env:
           GH_TOKEN: ${{ secrets.ABC }}
